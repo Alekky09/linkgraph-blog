@@ -1,0 +1,20 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}Blog - Dashboard{% endblock %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Writer</th>
+            <th>Total Articles Written</th>
+            <th>Total Articles Written in the Last 30 days</th>
+        </tr>
+        {% for writer in queryset %}
+        <tr>
+            <td>{{ writer.name }}</td>
+            <td>{{ writer.count_written }}</td>
+            <td>{{ writer.last_30}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}Blog - Article{% endblock %}
+
+{% block body %}
+
+<span>Written by: {{ article.written_by.name }}</span>
+<span>
+{{ article.status|yesno:"Approved, Rejected, Not reviewed yet" }}
+</span>
+<form action="{% url 'blog-article-detail' article.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+
+
+{% endblock %}

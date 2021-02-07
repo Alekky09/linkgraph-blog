@@ -1,0 +1,11 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}Blog - Create Article{% endblock %}
+
+{% block body %}
+<form action="{% url 'blog-create-article' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+{% endblock %}

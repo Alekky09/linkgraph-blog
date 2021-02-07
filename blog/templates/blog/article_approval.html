@@ -1,0 +1,34 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}Blog - Article Approval{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Writer</th>
+        <th>Title</th>
+        <th></th>
+        <th></th>
+    </tr>
+{% for article in fresh_articles %}
+    <tr>
+        <td>{{ article.written_by.name }}</td>
+        <td><a href="{% url 'blog-article-detail' article.id %}">{{ article.title }}</a></td>
+        <td>
+            <form action="{% url 'blog-article-approval' %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="article_id" value="{{ article.id }}" hidden>
+                <input type="submit" name="approve" value="Approve">
+            </form>
+        </td>
+        <td>
+            <form action="{% url 'blog-article-approval' %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="article_id" value="{{ article.id }}" hidden>
+                <input type="submit" name="reject" value="Reject">
+            </form>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}Blog - Reviewed Articles{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Writer</th>
+        <th>Title</th>
+        <th>Status</th>
+    </tr>
+{% for article in reviewed_articles %}
+    <tr>
+        <td>{{ article.written_by.name }}</td>
+        <td><a href="{% url 'blog-article-detail' article.id %}">{{ article.title }}</a></td>
+        <td>{{ article.status|yesno:"Approved, Rejected" }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
